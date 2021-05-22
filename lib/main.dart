@@ -1,32 +1,32 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hci_a2_app/screens/favourites.dart';
-import 'package:hci_a2_app/screens/home.dart';
-import 'package:hci_a2_app/theme/theme.dart';
-import 'package:provider/provider.dart';
-import './provider/artist.dart';
+import 'package:hci_a2_app/music_provider_app.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MusicProviderApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _firebase = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ArtistProvider(),),
-            ChangeNotifierProvider(create: (_) => FavouriteArtistProvider()),],
-            builder: (_, __) => MaterialApp(
-        title: 'Musicians App',
-        // hide debug label
-        debugShowCheckedModeBanner: false,
-        // custom theme
-        theme: theme(),
-        initialRoute: HomeScreen.routeName,
-        routes: {
-          HomeScreen.routeName: (ctx) => HomeScreen(),
-          FavouritesScreen.routeName: (ctx) => FavouritesScreen(),
-        },
-      ),
+    return FutureBuilder(
+      future: _firebase,
+      builder: (ctx, snapshot) {
+        if (snapshot.hasError) {
+          return Text("uups");
+        } else if (snapshot.hasData) {
+          return MusicProviderApp();
+        }
+        return CircularProgressIndicator();
+      },
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:math';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hci_a2_app/provider/artist.dart';
 import 'package:http/http.dart' as http;
@@ -72,7 +74,7 @@ class _SearchFieldState extends State<SearchField> {
     if (_formKey.currentState.validate()) {
       // if there is no such artist, http.get has thrown an exception
       // so we can assume artist is not null
-      Artist artist = await _retrieveArtist(); 
+      Artist artist = await _retrieveArtist();
       // update the provider with the searched artist
       artistProvider.set(artist);
     }

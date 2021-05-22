@@ -12,7 +12,10 @@ class HomeScreen extends StatelessWidget {
         // prevent Footer coming up with keyboard
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Home', style: Theme.of(context).accentTextTheme.headline1,),
+          title: Text(
+            'Home',
+            style: Theme.of(context).accentTextTheme.headline1,
+          ),
           actions: [
             IconButton(
               icon: Icon(Icons.favorite_border),
