@@ -24,9 +24,7 @@ class _SearchResultState extends State<SearchResult> {
         children: [
           // show Artist if an artist is searched
           // otherwise show nothing
-          artistProvider.artist == null
-              ? SizedBox.shrink()
-              : ArtistCard(),
+          artistProvider.artist == null ? SizedBox.shrink() : ArtistCard(),
           // show Albums if an Artist is searched
           // otherwise show nothing
           artistProvider.artist == null
@@ -36,14 +34,19 @@ class _SearchResultState extends State<SearchResult> {
                   builder: (ctx, snapshot) {
                     if (snapshot.hasData) {
                       List<Album> albums = snapshot.data;
-                      if(snapshot.data == null) return SizedBox.shrink();
-                      else return Expanded(
-                        child: SingleChildScrollView(child: AlbumPanel(albums: albums, index: 1),),
-                      );
+                      if (snapshot.data == null)
+                        return SizedBox.shrink();
+                      else
+                        return Expanded(
+                          child: SingleChildScrollView(
+                            child: AlbumPanel(albums: albums, index: 1),
+                          ),
+                        );
                     } else {
                       return CircularProgressIndicator();
                     }
-                  }),
+                  },
+                ),
         ],
       ),
     );
@@ -70,5 +73,3 @@ class _SearchResultState extends State<SearchResult> {
     return jsonDecode(response.body);
   }
 }
-
-

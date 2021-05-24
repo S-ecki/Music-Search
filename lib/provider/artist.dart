@@ -1,28 +1,46 @@
 import 'package:flutter/foundation.dart';
 
-// holds info for single Artist to display 
+// holds info for single Artist to display
 class Artist {
   final String _id;
   final String _name;
+  final String _formed;
+  final String _genre;
 
-  Artist({@required id, @required name})
-      : this._id = id,
-        this._name = name;
+  Artist({
+    @required id,
+    @required name,
+    @required formed,
+    @required genre,
+  })  : this._id = id,
+        this._name = name,
+        this._formed = formed,
+        this._genre = genre;
 
   // for conventient parsing
   factory Artist.fromJson(Map<String, dynamic> json) {
     return Artist(
       id: json['artists'][0]['idArtist'],
       name: json['artists'][0]['strArtist'],
+      formed: json['artists'][0]['intFormedYear'],
+      genre: json['artists'][0]['strGenre'],
     );
+  }
+
+  String get id {
+    return _id;
   }
 
   String get name {
     return _name;
   }
 
-  String get id {
-    return _id;
+  String get formed {
+    return _formed;
+  }
+  
+  String get genre {
+    return _genre;
   }
 }
 

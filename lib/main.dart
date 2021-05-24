@@ -4,7 +4,7 @@ import 'package:hci_a2_app/music_provider_app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MusicProviderApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {

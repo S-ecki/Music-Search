@@ -20,7 +20,7 @@ class _AlbumPanelState extends State<AlbumPanel> {
   Widget build(BuildContext context) {
     return Container(
         child: ExpansionPanelList(
-          expandedHeaderPadding: EdgeInsets.all(0),
+      expandedHeaderPadding: EdgeInsets.all(0),
       // expand on tap of chevron and refresh state
       expansionCallback: (index, isExpanded) {
         setState(
@@ -35,7 +35,8 @@ class _AlbumPanelState extends State<AlbumPanel> {
           canTapOnHeader: true,
           // header: always seen
           headerBuilder: (ctx, _) {
-            return ListTile(title: Text(item.name ?? ""), leading: Icon(Icons.album));
+            return ListTile(
+                title: Text(item.name ?? ""), leading: Icon(Icons.album));
           },
           // seen when Panel is expanded
           body: ExpansionPanelBody(item),
@@ -82,7 +83,9 @@ class ExpansionPanelBody extends StatelessWidget {
 }
 
 class ExpansionPanelBodyText extends StatelessWidget {
-  const ExpansionPanelBodyText({@required this.album,});
+  const ExpansionPanelBodyText({
+    @required this.album,
+  });
 
   final Album album;
 
@@ -104,9 +107,7 @@ class ExpansionPanelBodyText extends StatelessWidget {
                 children: [
                   TextSpan(
                     // genre is never null, but ""
-                    text: album.genre.isEmpty
-                        ? "not available"
-                        : "${album.genre}",
+                    text: album.genre ?? "not available",
                     style: Theme.of(context).accentTextTheme.bodyText2,
                   )
                 ]),
@@ -123,7 +124,6 @@ class ExpansionPanelBodyText extends StatelessWidget {
                   TextSpan(
                     // may be null
                     text: album.releaseYear ?? "not available",
-
                     style: Theme.of(context).accentTextTheme.bodyText2,
                   )
                 ]),

@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:math';
 
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hci_a2_app/firestore/functions.dart';
 import 'package:hci_a2_app/provider/artist.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -77,8 +77,11 @@ class _SearchFieldState extends State<SearchField> {
       Artist artist = await _retrieveArtist();
       // update the provider with the searched artist
       artistProvider.set(artist);
+
+      saveSearchedArtist(artist);
     }
   }
+
 
   // searches artist and parses json to Artist object
   Future<Artist> _retrieveArtist() async {
