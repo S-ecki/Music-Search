@@ -18,13 +18,32 @@ class Artist {
         this._genre = genre;
 
   // for conventient parsing
-  factory Artist.fromJson(Map<String, dynamic> json) {
+  factory Artist.fromJsonAPI(Map<String, dynamic> json) {
     return Artist(
       id: json['artists'][0]['idArtist'],
       name: json['artists'][0]['strArtist'],
       formed: json['artists'][0]['intFormedYear'],
       genre: json['artists'][0]['strGenre'],
     );
+  }
+
+  // for type safety on firebase
+  Artist.fromJsonFirebase(Map<String, Object> json)
+      : this(
+          id: json["id"] as String,
+          name: json["name"] as String,
+          formed: json["formed"] as String,
+          genre: json["genre"] as String,
+        );
+
+  // for type safety on firebase
+  Map<String, Object> toJsonFirebase() {
+    return {
+      "id": id,
+      "name": name,
+      "formed": formed,
+      "genre": genre,
+    };
   }
 
   String get id {
@@ -38,7 +57,7 @@ class Artist {
   String get formed {
     return _formed;
   }
-  
+
   String get genre {
     return _genre;
   }

@@ -91,7 +91,7 @@ class _SearchFieldState extends State<SearchField> {
           "https://www.theaudiodb.com/api/v1/json/1/search.php?s=${_controller.text}");
       final response = await http.get(url);
       // create Artist object from retrieved json
-      Artist artist = Artist.fromJson(jsonDecode(response.body));
+      Artist artist = Artist.fromJsonAPI(jsonDecode(response.body));
       return artist;
     } on NoSuchMethodError catch (_) {
       // show error if no results were found

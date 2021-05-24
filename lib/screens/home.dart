@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hci_a2_app/components/footer.dart';
 import 'package:hci_a2_app/components/search_field.dart';
 import 'package:hci_a2_app/components/search_result.dart';
+import 'package:hci_a2_app/components/searched_list.dart';
 import 'package:hci_a2_app/screens/favourites.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -31,6 +32,8 @@ class HomeScreen extends StatelessWidget {
             SearchField(),
             // takes as much space as is left
             SearchResult(),
+            // 
+            SearchedList(),
             // takes as much space as it needs
             Footer(),
           ],
