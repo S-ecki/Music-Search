@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hci_a2_app/provider/favourite.dart';
 import 'package:provider/provider.dart';
 import '../provider/artist.dart';
 
@@ -11,7 +12,8 @@ class _ArtistCardState extends State<ArtistCard> {
   @override
   Widget build(BuildContext context) {
     final artistProvider = Provider.of<ArtistProvider>(context);
-    final favourites = Provider.of<FavouriteArtistProvider>(context);
+    final favouriteProvider = Provider.of<FavouriteArtistProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
@@ -21,14 +23,18 @@ class _ArtistCardState extends State<ArtistCard> {
             text: TextSpan(
                 style: Theme.of(context).accentTextTheme.bodyText1,
                 text: "Albums from: ",
-                children: [TextSpan(text: "${artistProvider.artist.name}", style: TextStyle(color: Theme.of(context).primaryColor))]),
+                children: [
+                  TextSpan(
+                      text: "${artistProvider.artist.name}",
+                      style: TextStyle(color: Theme.of(context).primaryColor))
+                ]),
           ),
           IconButton(
-            icon: favourites.contains(artistProvider.artist)
+            icon: favouriteProvider.contains(artistProvider.artist)
                 ? Icon(Icons.favorite, color: Theme.of(context).primaryColor)
                 : Icon(Icons.favorite_border),
             onPressed: () {
-              favourites.addOrRemove(artistProvider.artist);
+              favouriteProvider.addOrRemove(artistProvider.artist);
             },
           ),
         ],
