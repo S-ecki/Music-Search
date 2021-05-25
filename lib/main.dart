@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
       future: _firebase,
       builder: (ctx, snapshot) {
         if (snapshot.hasError) {
-          return Text("uups");
+          return Center(child: Text("An error occurred"));
         } else if (snapshot.hasData) {
           return MusicProviderApp();
         }

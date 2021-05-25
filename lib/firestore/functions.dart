@@ -6,7 +6,7 @@ class FirebaseFunctions {
   static final searchedCollectionRef =
       FirebaseFirestore.instance.collection("SearchedArtists").withConverter(
             // dont have to use json not
-            fromFirestore: (snapshot, _) => Artist.fromJsonAPI(snapshot.data()),
+            fromFirestore: (snapshot, _) => Artist.fromJsonFirebase(snapshot.data()),
             toFirestore: (providedArtist, _) => providedArtist.toJsonFirebase(),
           );
 
@@ -14,7 +14,7 @@ class FirebaseFunctions {
   static final favCollectionRef =
       FirebaseFirestore.instance.collection("FavouriteArtists").withConverter(
             // dont have to use json not
-            fromFirestore: (snapshot, _) => Artist.fromJsonAPI(snapshot.data()),
+            fromFirestore: (snapshot, _) => Artist.fromJsonFirebase(snapshot.data()),
             toFirestore: (providedArtist, _) => providedArtist.toJsonFirebase(),
           );
 
