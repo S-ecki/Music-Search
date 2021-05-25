@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hci_a2_app/provider/artist.dart';
-import 'package:hci_a2_app/screens/home.dart';
 import 'package:provider/provider.dart';
 
 class RecentSearchesScreen extends StatelessWidget {
@@ -14,7 +13,8 @@ class RecentSearchesScreen extends StatelessWidget {
     final _artistStream = FirebaseFirestore.instance
         .collection("SearchedArtists")
         .withConverter(
-            fromFirestore: (snapshot, _) => Artist.fromJsonFirebase(snapshot.data()),
+            fromFirestore: (snapshot, _) =>
+                Artist.fromJsonFirebase(snapshot.data()),
             toFirestore: (providedArtist, _) => providedArtist.toJsonFirebase())
         .orderBy("time")
         .snapshots();
@@ -28,7 +28,7 @@ class RecentSearchesScreen extends StatelessWidget {
         // rebuilds on every change of searched artists
         child: StreamBuilder(
           stream: _artistStream,
-          // ! static type here with artist makes it possible to work with 
+          // ! static type here with artist makes it possible to work with
           // ! artist types instead of dynamic when getting data of snapshot
           builder: (context, AsyncSnapshot<QuerySnapshot<Artist>> snapshot) {
             if (snapshot.hasError) {
@@ -43,10 +43,10 @@ class RecentSearchesScreen extends StatelessWidget {
             // those ListTiles build the ListView
             final result = snapshot.data.docs.map<Widget>((doc) {
               return InkWell(
-                // go back to homescreen
+                // go back to homescreen and search for artist from doc
                 onTap: () {
                   artistProvider.set(doc.data());
-                  Navigator.of(context).pushNamed(HomeScreen.routeName);
+                  Navigator.of(context).pop();
                 },
                 child: ListTile(
                   title: Text(doc["name"]),

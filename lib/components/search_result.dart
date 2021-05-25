@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hci_a2_app/components/album_panel.dart';
@@ -6,7 +5,6 @@ import 'package:hci_a2_app/components/artist_card.dart';
 import 'package:hci_a2_app/provider/album.dart';
 import 'package:hci_a2_app/provider/artist.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 
 class SearchResult extends StatefulWidget {
   @override
@@ -30,7 +28,7 @@ class _SearchResultState extends State<SearchResult> {
           artistProvider.artist == null
               ? SizedBox.shrink()
               : FutureBuilder(
-                  future: _retrieveAlbums(artistProvider.artist.id),
+                  future: Album.retrieveAlbums(artistProvider.artist.id),
                   builder: (ctx, snapshot) {
                     if (snapshot.hasData) {
                       List<Album> albums = snapshot.data;
@@ -52,24 +50,5 @@ class _SearchResultState extends State<SearchResult> {
     );
   }
 
-  // create List of all albums from artist with id
-  Future<List<Album>> _retrieveAlbums(String id) async {
-    dynamic response = await _retrieveJsonResponse(id);
-
-    // add all albums from json to List
-    List<Album> albums = [];
-    for (var i = 0; i < response["album"].length; ++i) {
-      albums.add(Album.fromJson(response, i));
-    }
-    return albums;
-  }
-
-  // search for albums of artist with id
-  // return decoded json body
-  dynamic _retrieveJsonResponse(String id) async {
-    final url =
-        Uri.parse("https://theaudiodb.com/api/v1/json/1/album.php?i=$id");
-    var response = await http.get(url);
-    return jsonDecode(response.body);
-  }
+  
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hci_a2_app/provider/artist.dart';
 import 'package:hci_a2_app/provider/favourite.dart';
-import 'package:hci_a2_app/screens/home.dart';
 import 'package:provider/provider.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -26,7 +25,7 @@ class FavouritesScreen extends StatelessWidget {
             // go back to homescreen
             onTap: () {
               artistProvider.set(favourites.list[index]);
-              Navigator.of(context).pushNamed(HomeScreen.routeName);
+              Navigator.of(context).pop();
             },
             child: ListTile(
               title: Text(favourites.list[index].name),
