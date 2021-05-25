@@ -78,7 +78,7 @@ class _SearchFieldState extends State<SearchField> {
       // update the provider with the searched artist
       artistProvider.set(artist);
 
-      saveSearchedArtist(artist);
+      FirebaseFunctions.saveSearchedArtist(artist);
     }
   }
 

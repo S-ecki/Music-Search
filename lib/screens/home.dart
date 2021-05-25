@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hci_a2_app/components/footer.dart';
 import 'package:hci_a2_app/components/search_field.dart';
 import 'package:hci_a2_app/components/search_result.dart';
-import 'package:hci_a2_app/components/searched_list.dart';
 import 'package:hci_a2_app/screens/favourites.dart';
+import 'package:hci_a2_app/screens/recent_searches.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = '/';
@@ -19,6 +19,12 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: [
             IconButton(
+              icon: Icon(Icons.restore),
+              onPressed: () {
+                Navigator.of(context).pushNamed(RecentSearchesScreen.routeName);
+              },
+            ),
+            IconButton(
               icon: Icon(Icons.favorite_border),
               onPressed: () {
                 Navigator.of(context).pushNamed(FavouritesScreen.routeName);
@@ -32,8 +38,6 @@ class HomeScreen extends StatelessWidget {
             SearchField(),
             // takes as much space as is left
             SearchResult(),
-            // 
-            SearchedList(),
             // takes as much space as it needs
             Footer(),
           ],
