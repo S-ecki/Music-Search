@@ -56,4 +56,31 @@ class FirebaseFunctions {
   static void deleteFav(Artist artist) async {
     await _favCollectionRef.doc(artist.id).delete();
   }
+
+  static Future<List<Album>> getAlbumsByRelease(String releaseYear) async {
+    // list of albums with release year
+    List<Album> returnList = [];
+
+    // access all albums (from every artist)
+    final groupColRef = FirebaseFirestore.instance
+        .collectionGroup("Albums")
+        .withConverter(
+            fromFirestore: (snapshot, _) =>
+                Album.fromJsonFirebase(snapshot.data()),
+            toFirestore: (album, _) => album.toJsonFirebase());
+
+    // query and save data to return list
+    await groupColRef
+        .where("releaseYear", isEqualTo: releaseYear)
+        .orderBy("name")
+        .get()
+        .then((snapshot) {
+      print(snapshot.size);
+      snapshot.docs.forEach((albumSnapshot) {
+        returnList.add(albumSnapshot.data());
+      });
+    });
+    print(returnList.length);
+    return returnList;
+  }
 }

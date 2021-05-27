@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hci_a2_app/components/footer.dart';
 import 'package:hci_a2_app/components/search_field.dart';
 import 'package:hci_a2_app/components/search_result.dart';
+import 'package:hci_a2_app/firestore/functions.dart';
 import 'package:hci_a2_app/screens/favourites.dart';
 import 'package:hci_a2_app/screens/recent_searches.dart';
 

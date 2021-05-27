@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hci_a2_app/provider/artist.dart';
+import 'package:hci_a2_app/screens/album_filters.dart';
 import 'package:provider/provider.dart';
 
 class RecentSearchesScreen extends StatelessWidget {
@@ -22,6 +23,13 @@ class RecentSearchesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Recent Searches'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.filter_list_rounded),
+              onPressed: () {
+                Navigator.of(context).pushNamed(AlbumFilters.routeName);
+              })
+        ],
       ),
       body: Container(
         color: Colors.white,
