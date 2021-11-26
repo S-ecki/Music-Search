@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/75510543/143661648-ccabefe9-fffb-47cf-96eb-28c807d09c29.jpg" width=300 align="right">
 
-# Firebase-Learning
+# Music-Search
 The aim of this project was to get to know Firebase for Flutter and create a beautiful app while at it.
 
 ## App Features
